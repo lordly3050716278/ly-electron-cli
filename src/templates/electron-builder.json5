@@ -10,7 +10,7 @@
   "asar": true,
 
   // 应用的名称，会作为生成的文件名、安装目录名等使用
-  "productName": "YourAppName",
+  "productName": "MyApp",
 
   // 指定构建产物输出目录，${version} 是自动填充的应用版本号
   "directories": {

@@ -12,9 +12,11 @@ import { createPackageJson } from './package.json.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+const pkg = fs.readJsonSync(path.resolve(__dirname, '../package.json'))
+
 // 指定版本和描述信息
 program
-    .version('0.0.0')
+    .version(pkg.version)
     .description('用于创建 Vite + Vue + Electron 快速启动项目')
 
 // 初始化一个 Vite + Vue + Electron 快速启动项目
@@ -22,8 +24,9 @@ program.command('init')
     .description("初始化一个 Vite + Vue + Electron 快速启动项目")
     .action(async () => {
         // 交互式提问
-        const { projectName, installDeps } = await inquirer.prompt([
+        const { projectName, productName, installDeps } = await inquirer.prompt([
             { type: 'input', name: 'projectName', message: '项目名称：' },
+            { type: 'input', name: 'productName', message: '应用名称：' },
             { type: 'confirm', name: 'installDeps', message: '是否安装依赖？', default: true }
         ])
 
@@ -48,7 +51,7 @@ program.command('init')
         // 创建项目文件
         fs.copySync(path.join(__dirname, 'templates'), path.join(projectPath))
 
-        fs.writeFileSync(path.join(projectPath, 'package.json'), createPackageJson(projectName))
+        fs.writeFileSync(path.join(projectPath, 'package.json'), createPackageJson(projectName, productName))
 
         // 如果用户选择安装依赖
         if (installDeps) {

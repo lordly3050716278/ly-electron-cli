@@ -28,7 +28,7 @@ vite-electron init
    vite-electron init
    ```
 
-2. 按提示输入项目名称，例如：`my-app`
+2. 按提示输入项目名称和应用名称，例如：`my-app`
 
 3. 是否安装依赖？选择 `Yes`
 
@@ -87,6 +87,7 @@ my-app/
 ├── electron-builder.json5          # Electron 构建配置
 ├── index.html
 ├── jsconfig.json
+├── sync-product-name.cjs           # 同步打包的应用名字为 package.json中的productName
 └── vite.config.js                  # Vite 配置
 ```
 
