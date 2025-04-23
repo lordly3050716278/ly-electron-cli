@@ -11,7 +11,10 @@ const main = async () => {
     try {
         // 删除打包产物
         await fs.promises.rm(distPath, { recursive: true, force: true })
+        console.log(`✅ 已将 "dist" 目录清除`)
+
         await fs.promises.rm(distElectronPath, { recursive: true, force: true })
+        console.log(`✅ 已将 "dist-electron" 目录清除`)
 
         // 读取并解析 JSON 文件
         const pkgData = await fs.promises.readFile(pkgPath, 'utf-8')

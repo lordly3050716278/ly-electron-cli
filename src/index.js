@@ -40,8 +40,17 @@ program.command('init')
 
         // 目录存在
         if (fs.existsSync(projectPath)) {
-            console.log(chalk.red('❌ 目录已存在无法创建'))
-            return
+            const { ifReplaceDir } = await inquirer.prompt([
+                { type: 'confirm', name: 'ifReplaceDir', message: '目录已存在，是否覆盖创建？', default: true }
+            ])
+
+            if (!ifReplaceDir) {
+                console.log(chalk.red('❌ 目录已存在无法创建'))
+                return
+            }
+
+            await fs.promises.rm(projectPath, { recursive: true, force: true })
+            console.log(chalk.green(`✅ 已将目录删除！`))
         }
 
         // 创建项目目录
