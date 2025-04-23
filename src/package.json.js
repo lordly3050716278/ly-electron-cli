@@ -7,7 +7,7 @@ export const createPackageJson = (projectName, productName) => {
         "type": "module",
         "scripts": {
             "dev": "vite",
-            "build": "vite build && electron-builder",
+            "build": "node ./sync-product-name.cjs && vite build && electron-builder",
             "preview": "vite preview"
         },
         "dependencies": {

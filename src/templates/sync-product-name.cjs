@@ -4,6 +4,7 @@ const JSON5 = require('json5')
 
 const pkgPath = path.resolve(__dirname, 'package.json')
 const builderPath = path.resolve(__dirname, 'electron-builder.json5')
+
 async function syncProductName() {
     // 读取并解析 JSON 文件
     const pkgData = await fs.promises.readFile(pkgPath, 'utf-8')

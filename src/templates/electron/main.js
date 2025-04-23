@@ -9,7 +9,7 @@ import path from 'node:path'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // 应用名
-const APP_NAME = app.getName()
+const APP_NAME = app.getName() || 'MyApp'
 
 // 设置全局环境变量 APP_ROOT，指向项目根目录
 process.env.APP_ROOT = path.join(__dirname, '..')
