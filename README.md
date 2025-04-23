@@ -86,8 +86,8 @@ my-app/
 │   └── style.css
 ├── electron-builder.json5          # Electron 构建配置
 ├── index.html
+├── init.cjs                        # 打包前置初始化操作
 ├── jsconfig.json
-├── sync-product-name.cjs           # 同步打包的应用名字为 package.json中的productName
 └── vite.config.js                  # Vite 配置
 ```
 
