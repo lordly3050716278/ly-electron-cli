@@ -1,7 +1,7 @@
 {
   "name": "ly-electron-cli",
-  "version": "0.0.4",
-  "description": "创建一个vite+vue+electron的脚手架",
+  "version": "0.0.5",
+  "description": "创建一个 Vite + Vue + Electron 的脚手架",
   "main": "src/index.js",
   "type": "module",
   "bin": {

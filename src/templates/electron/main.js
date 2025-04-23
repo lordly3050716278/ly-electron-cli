@@ -30,6 +30,8 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
 let win = null
 // 托盘图标变量
 let tray = null
+// 是否需要退出应用
+let isQuiting = false
 
 // 创建托盘图标及其菜单
 function createTray() {
@@ -45,6 +47,7 @@ function createTray() {
     {
       label: '退出',
       click: () => {
+        isQuiting = true // 设置标志
         tray?.destroy() // 移除托盘图标
         app.quit()      // 退出应用
       }
@@ -71,7 +74,7 @@ function createWindow() {
 
   // 拦截窗口关闭事件，最小化到托盘而不是退出应用
   win.on('close', (e) => {
-    if (process.platform !== 'darwin') {
+    if (!isQuiting && process.platform !== 'darwin') {
       e.preventDefault()
       win?.hide() // 隐藏窗口（最小化到托盘）
     }
