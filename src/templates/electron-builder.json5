@@ -1,0 +1,81 @@
+// @see - https://www.electron.build/configuration/configuration
+{
+  // 使用 electron-builder 的 JSON schema 进行格式校验和提示
+  "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
+
+  // 应用的唯一 ID，建议使用域名倒写（如：com.example.myapp）
+  "appId": "YourAppID",
+
+  // 是否开启 asar 打包（把代码打包为一个 asar 文件，防止源码泄露）
+  "asar": true,
+
+  // 应用的名称，会作为生成的文件名、安装目录名等使用
+  "productName": "YourAppName",
+
+  // 指定构建产物输出目录，${version} 是自动填充的应用版本号
+  "directories": {
+    "output": "release/${version}"
+  },
+
+  // 指定需要包含在打包中的文件或目录
+  "files": [
+    "dist",           // 渲染进程构建产物
+    "dist-electron"   // 主进程构建产物
+  ],
+
+  // macOS 平台的打包配置
+  "mac": {
+    // 指定构建目标，这里使用 DMG 安装包格式
+    "target": [
+      "dmg"
+    ],
+    // 指定构建产物的文件名格式
+    "artifactName": "${productName}-Mac-${version}-Installer.${ext}"
+  },
+
+  // Windows 平台的打包配置
+  "win": {
+    "icon": "build/favicon.ico", // 👈 设置你的图标路径
+    "target": [
+      {
+        // 使用 NSIS 构建安装程序（可自定义安装流程）
+        "target": "nsis",
+        // 构建 64 位程序
+        "arch": ["x64"]
+      }
+    ],
+    // 构建产物的命名格式
+    "artifactName": "${productName}-Windows-${version}-Setup.${ext}"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "deleteAppDataOnUninstall": false,
+    "installerIcon": "build/favicon.ico", // 设置安装程序图标
+    "uninstallerIcon": "build/favicon.ico", // 设置卸载程序图标
+    "uninstallerThumbprint": "build/favicon.ico" // 设置卸载程序图标缩略图
+  },
+
+  // NSIS 安装器的详细配置（用于 Windows 安装包）
+  "nsis": {
+    // 是否为一键安装（false 表示用户可选择安装步骤）
+    "oneClick": false,
+    // 是否为全局安装（false 表示仅安装到当前用户目录）
+    "perMachine": false,
+    // 是否允许用户更改安装路径
+    "allowToChangeInstallationDirectory": true,
+    // 卸载时是否删除 AppData（false 表示保留用户数据）
+    "deleteAppDataOnUninstall": false
+  },
+
+  // Linux 平台的打包配置
+  "linux": {
+    // 指定构建目标为 AppImage 格式（可执行的单文件包）
+    "target": [
+      "AppImage"
+    ],
+    // 构建产物的命名格式
+    "artifactName": "${productName}-Linux-${version}.${ext}"
+  }
+}
