@@ -25,7 +25,7 @@ const main = async () => {
         const builderConfig = JSON5.parse(builderData) // 使用 JSON5 解析 .json5 文件
 
         // 同步 productName
-        builderConfig.productName = pkg.productName || 'MyApp'
+        builderConfig.productName = pkg.buildName || 'MyApp'
 
         // 写入修改后的配置
         await fs.promises.writeFile(builderPath, JSON5.stringify(builderConfig, null, 2)) // 使用 JSON5 来写入

@@ -24,9 +24,10 @@ program.command('init')
     .description("初始化一个 Vite + Vue + Electron 快速启动项目")
     .action(async () => {
         // 交互式提问
-        const { projectName, productName, installDeps } = await inquirer.prompt([
+        const { projectName, productName, buildName, installDeps } = await inquirer.prompt([
             { type: 'input', name: 'projectName', message: '项目名称：' },
             { type: 'input', name: 'productName', message: '应用名称：' },
+            { type: 'input', name: 'buildName', message: '打包产物名称：' },
             { type: 'confirm', name: 'installDeps', message: '是否安装依赖？', default: true }
         ])
 
@@ -60,7 +61,7 @@ program.command('init')
         // 创建项目文件
         fs.copySync(path.join(__dirname, 'templates'), path.join(projectPath))
 
-        fs.writeFileSync(path.join(projectPath, 'package.json'), createPackageJson(projectName, productName))
+        fs.writeFileSync(path.join(projectPath, 'package.json'), createPackageJson(projectName, productName, buildName))
 
         // 如果用户选择安装依赖
         if (installDeps) {

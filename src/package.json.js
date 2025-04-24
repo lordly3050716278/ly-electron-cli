@@ -1,7 +1,8 @@
-export const createPackageJson = (projectName, productName) => {
+export const createPackageJson = (projectName, productName, buildName) => {
     return JSON.stringify({
         "name": projectName,
-        "productName": productName ?? 'MyApp',
+        "productName": productName ?? "MyApp",
+        "buildName": buildName ?? "MyApp",
         "version": "0.0.0",
         "private": true,
         "type": "module",
