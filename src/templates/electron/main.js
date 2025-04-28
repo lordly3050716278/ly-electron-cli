@@ -71,7 +71,6 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.mjs'), // 预加载脚本
       nodeIntegration: false,    // 禁止 Node
       contextIsolation: true,    // 启用隔离
-      sandbox: false,            // 根据需要是否启用
       enableRemoteModule: false  // 禁止 remote 模块（防止远程执行）
     }
   })
