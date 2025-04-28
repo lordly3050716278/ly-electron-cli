@@ -24,13 +24,16 @@ const main = async () => {
         const pkg = JSON.parse(pkgData)
         const builderConfig = JSON5.parse(builderData) // 使用 JSON5 解析 .json5 文件
 
+        // 同步appId
+        builderConfig.appId = pkg.appId || 'com.example.app'
+
         // 同步 productName
         builderConfig.productName = pkg.buildName || 'MyApp'
 
         // 写入修改后的配置
         await fs.promises.writeFile(builderPath, JSON5.stringify(builderConfig, null, 2)) // 使用 JSON5 来写入
 
-        console.log(`✅ 已将 productName 同步为 "${builderConfig.productName}"`)
+        console.log(`✅ 已将 productName 同步为 "${builderConfig.productName}"，appId 同步为 "${builderConfig.appId}"`)
     } catch (error) {
         console.error('发生错误:', error)
     }
