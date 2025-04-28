@@ -8,6 +8,7 @@ import fs from 'fs-extra'
 import chalk from 'chalk'
 import { execSync } from 'child_process'
 import { createPackageJson } from './package.json.js'
+import { createIndexHTML } from './index.html.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -63,6 +64,7 @@ program.command('init')
         fs.copySync(path.join(__dirname, 'templates'), path.join(projectPath))
 
         fs.writeFileSync(path.join(projectPath, 'package.json'), createPackageJson(projectName, productName, buildName, appId))
+        fs.writeFileSync(path.join(projectPath, 'index.html'), createIndexHTML(productName))
 
         // 如果用户选择安装依赖
         if (installDeps) {
