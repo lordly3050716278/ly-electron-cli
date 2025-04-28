@@ -13,11 +13,7 @@
 <script setup>
 import HelloWorld from '@/components/HelloWorld.vue'
 
-window.ipcRenderer.on('main-process-loaded', (evt, ...args) => {
-  const [title] = args
-  document.title = title
-})
-
+window.ipcRenderer.on('main-process-loaded', (evt, ...args) => console.log('main-process-loaded', args))
 window.ipcRenderer.send('render-process-message', (new Date).toLocaleString())
 </script>
 

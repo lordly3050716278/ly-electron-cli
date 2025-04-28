@@ -8,9 +8,6 @@ import path from 'node:path'
 // 获取当前文件的目录名（替代 __dirname）
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-// 应用名
-const APP_NAME = app.getName() || 'MyApp'
-
 // 设置全局环境变量 APP_ROOT，指向项目根目录
 process.env.APP_ROOT = path.join(__dirname, '..')
 
@@ -54,7 +51,7 @@ function createTray() {
     }
   ])
 
-  tray.setToolTip(APP_NAME)         // 设置鼠标悬停提示
+  tray.setToolTip(app.getName() || 'MyApp')         // 设置鼠标悬停提示
   tray.setContextMenu(contextMenu)        // 设置右键菜单
   tray.on('double-click', () => win?.show()) // 双击托盘图标还原窗口
 }
@@ -87,9 +84,7 @@ function createWindow() {
   createTray()
 
   // 页面加载完成后，发送当前时间给渲染进程
-  win.webContents.on('did-finish-load', () => {
-    win?.webContents.send('main-process-loaded', APP_NAME)
-  })
+  win.webContents.on('did-finish-load', () => win?.webContents.send('main-process-loaded', new Date().toLocaleTimeString()))
 
   // 开发模式：加载 Vite 本地服务器地址，并打开开发者工具
   if (VITE_DEV_SERVER_URL) {
