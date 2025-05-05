@@ -49,7 +49,7 @@
       }
     ],
     // 构建产物的命名格式
-    "artifactName": "${productName}-Windows-${version}-Setup.${ext}"
+    "artifactName": "${productName}-Windows-${version}.${ext}"
   },
   "nsis": {
     "oneClick": false,
